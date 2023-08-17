@@ -1,0 +1,45 @@
+.header {
+    background-color: var(--color1);
+    color: var(--color5);
+    padding-left: 10px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+  }
+
+.icon {
+    margin-right: 10px;
+  }
+
+.icon img {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+.app-name {
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+.tabs {
+    background-color: var(--color1);
+    margin-top: 20px;
+    color: var(--color5);
+    text-align: center;
+  }
+
+@media (max-width: 768px) {
+  .header {
+      height: 86px;
+    }
+
+  .app-name {
+      font-size: 24px;
+      margin-left: 10px;
+    }
+
+  .tabs {
+      height: 48px;
+    }
+}
