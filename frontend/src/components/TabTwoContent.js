@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TabTwoContent() {
+const TabTwoContent = () => {
   return (
     <div>
       Content of Tab TWO

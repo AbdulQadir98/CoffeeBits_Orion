@@ -1,5 +1,3 @@
-import '../styles/main.css'
-
 import Header from "../components/Header"
 import Tab from "../components/Tab"
 

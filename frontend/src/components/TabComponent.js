@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-function TabComponent({ value, handleChange }) {
+const TabComponent = ({ value, handleChange }) => {
   return (
     <Box 
       sx={{ 
