@@ -1,21 +1,16 @@
-import React from 'react';
-import '../styles/header.css'
+import '../styles/main.css'
+
+import Header from "../components/Header"
+import Tab from "../components/Tab"
 
 const Home = () => {
-    return ( 
-      <>  
-        {/* header */}
-        <div className='header'>
-            <div className='bg-gray-100'>qwe</div>
-            <div>Orion</div>
-        </div> 
 
-        {/* tabs */}
-        <div className='tabs'></div>  
-
-        <div></div>
-      </>
-     );
+  return ( 
+    <>  
+       <Header />
+       <Tab />
+    </>
+   );
 }
  
 export default Home;
