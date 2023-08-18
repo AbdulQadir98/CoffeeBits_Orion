@@ -52,11 +52,12 @@
   }
 .calendar{
     max-width: 352px;
+    color: white;
   }
 .submit-button {
     display: inline-block;
     padding: 10px 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 150px;
     font-family: 'Orbitron';
     font-size: 18px;

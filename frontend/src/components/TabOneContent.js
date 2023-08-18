@@ -1,7 +1,7 @@
 // import { useState } from 'react'
-// import 'react-date-range/dist/styles.css';
-// import 'react-date-range/dist/theme/default.css';
-// import { Calendar } from 'react-date-range';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const TabOneContent = () => {
 
@@ -10,17 +10,20 @@ const TabOneContent = () => {
   // };
   return (
     <div className='tab-content'>
-      <div class="input-container">
+      <div className="input-container">
         <input type="text" value="11 Oct 2022" readonly/>
       </div>
       <div className='calendar'>
-        {/* <Calendar
-          date={new Date()}
-          onChange={handleSelect}
-        /> */}
+        <p className="">
+          When are you going?
+        </p>
+        <hr />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateCalendar />
+        </LocalizationProvider>
       </div>
-      <div class="submit-button">Apply</div>
-      <div class="cancel-button">Cancel</div>
+      <div className="submit-button">Apply</div>
+      <div className="cancel-button">Cancel</div>
     </div>
   );
 }
