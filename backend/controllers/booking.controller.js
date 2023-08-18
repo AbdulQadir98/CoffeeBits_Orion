@@ -14,5 +14,18 @@ const bookingService = require("../services/booking.services.js");
     }
   };
 
+  
+  const getFlights = async (req, res) => {
+    try {
+    
+      const newBooking = await bookingService.getFlights()
+      
+      res.status(201).json(newBooking);
+    } catch (error) {
+        
+      res.status(error.statusCode).json({"error":error.message});
+    }
+  };
 
-  module.exports={createBooking}
+
+  module.exports={createBooking,getFlights}
