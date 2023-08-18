@@ -8,7 +8,7 @@ const Header = () => {
           <div className='icon'>
             <img src={icon} alt="App Icon"/>
           </div>
-          <div class="app-name">
+          <div className="app-name">
             Orion
           </div>
         </div> 
