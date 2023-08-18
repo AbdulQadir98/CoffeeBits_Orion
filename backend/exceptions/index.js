@@ -6,4 +6,5 @@ function createBookingError(message, statusCode = HTTP_STATUS.INTERNAL_SERVER_ER
   return error;
 }
 
-module.exports = createBookingError;
+
+module.exports = {createBookingError};
