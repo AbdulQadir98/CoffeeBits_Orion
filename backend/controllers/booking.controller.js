@@ -17,8 +17,7 @@ const bookingService = require("../services/booking.services.js");
   
   const getFlights = async (req, res) => {
     try {
-    
-      const newBooking = await bookingService.getFlights()
+      const newBooking = await bookingService.getFlights(req.res)
       
       res.status(201).json(newBooking);
     } catch (error) {
