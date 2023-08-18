@@ -24,11 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 //     console.log("Failed to sync db: " + err.message);
 //   });
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Orion" });
-});
+require("./routes/auth.routes.js")(app);
+require("./routes/booking.routes.js")(app);
 
-// require("./routes/user.routes")(app);
+
+//middleware
+require("./middleware/notFound.middleware.js")(app);
 
 const PORT = process.env.DB_PORT || 8080;
 app.listen(PORT, () => {
