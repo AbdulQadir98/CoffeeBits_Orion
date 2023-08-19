@@ -1,5 +1,6 @@
 const bookingException = require("../exceptions/index.js");
 const helper = require("../helpers/seatCount.helpers.js");
+const { Op } = require('sequelize');
 
 const db = require("../models");
 
@@ -10,17 +11,17 @@ const flightPassenger = db.passenger;
 const createBooking = async (bookingInfo) => {
   try {
     console.log(bookingInfo);
-    const booking = await flightBooking.create({flightScheduleScheduleId : bookingInfo.scheduleId,} );
+    const booking = await flightBooking.create({ flightScheduleScheduleId: bookingInfo.scheduleId, });
 
     const passengerData = bookingInfo.passengers;
 
     const passengers = await flightPassenger.bulkCreate(
       passengerData.map((passenger) => ({
-        name : passenger.name,
-        age : passenger.age,
-        gender : passenger.gender,
-        class : passenger.class,
-        food : passenger.food,
+        name: passenger.name,
+        age: passenger.age,
+        gender: passenger.gender,
+        class: passenger.class,
+        food: passenger.food,
         bookingBookingId: booking.bookingId
       }))
     );
@@ -34,38 +35,49 @@ const createBooking = async (bookingInfo) => {
 
 const getFlights = async (passengerInput) => {
   try {
-    let startingLocation = passengerInput.startingLocation;
-    let destination = passengerInput.endingLocation;
-    let departureDate = passengerInput.departureDate;
-    let tripType = passengerInput.oneway;
-    let returnDate = passengerInput.returnDate;
-    // const seatCount = helper.getSeatCountForClass(passengers);
+
+    const startingLocation = passengerInput.startingLocation;
+    const destination = passengerInput.endingLocation;
+    const departureDate = new Date(passengerInput.departureDate);
+    const tripType = passengerInput.oneway;
+    const returnDate = new Date(passengerInput.returnDate);
+    const seatCount = helper.getSeatCountForClass(passengerInput.passengers);
 
     let result = {
-      "oneWay":null,
-      "returnFlights" :null
+      "oneWay": null,
+      "returnFlights": null
     };
-   
-    result.oneWay = getFlightResults(startingLocation,destination,departureDate);
 
-    if(tripType)
-    {
-      result.returnFlights = getFlightResults(destination,startingLocation,returnDate);
+    result.oneWay = await getFlightResults(startingLocation, destination, departureDate,seatCount);
+
+    if (!tripType) {
+      
+      result.returnFlights = await getFlightResults(destination, startingLocation, returnDate,seatCount);
     }
-    
+
     return result;
-  
+
   } catch (error) {
     throw error;
   }
 };
 
-const getFlightResults = (startingLocation,destination,departureDate) => {
+const getFlightResults = (startingLocation, destination, departureDate,seatCount) => {
+  console.log(seatCount.business)
   let flights = flightSchedules.findAll({
     where: {
       destinationPlanetId: destination,
       startPlanetId: startingLocation,
-      departureDate : departureDate
+      departureDate: departureDate,
+      businessClassSeatCount: {
+        [Op.gte]: seatCount.business,
+      },
+      economyClassSeatCount: {
+        [Op.gte]: seatCount.economy 
+      },
+      firstClassSeatCount: {
+        [Op.gte]: seatCount.first 
+      }
     },
   });
 
