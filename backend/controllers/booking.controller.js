@@ -20,4 +20,5 @@ const getFlights = async (req, res) => {
   }
 };
 
+
 module.exports = { createBooking, getFlights };

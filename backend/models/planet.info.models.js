@@ -1,34 +1,25 @@
 module.exports = (sequelize, Sequelize) => {
 
-    const user = sequelize.define("users", {
-        userId: {
+    const planetInfo = sequelize.define("planetInfo", {
+        planetInfoId: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true,
         },
 
-        username: {
+        heading: {
             type: Sequelize.STRING
         },
 
-        email: {
-            type: Sequelize.STRING
+        description: {
+            type: Sequelize.TEXT
         },
 
-        password: {
+        icon: {
             type: Sequelize.STRING
         },
-
-        profilepic: {
-            type: Sequelize.STRING
-        },
-
-        GIN: {
-            type: Sequelize.STRING
-        }
-
     });
 
-    return user;
+    return planetInfo;
 };
