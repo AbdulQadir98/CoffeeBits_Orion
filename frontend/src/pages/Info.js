@@ -126,9 +126,9 @@ const Info = () => {
                             <button>10:00 AM</button>
                         </div>
                     </div>
-
-                    <div className="continue">
-                        <button>Continue</button>
+                    <div className="button-container">
+                        <div className="submit-button">Continue</div>
+                        <div className="cancel-button">Cancel</div>
                     </div>
                 </form>
          </div>
