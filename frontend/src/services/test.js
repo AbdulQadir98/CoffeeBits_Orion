@@ -1,25 +1,14 @@
 import axios from 'axios';
 
 // CONSTANTS ?? or Config ??
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'http://localhost:8080/api/v1/booking';
 
-class UserService {
+class BookingService {
 
   //POST
-  login(username, password) {
-    return axios
-      .post(API_URL + "signin", {
-        username,
-        password
-      })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-
-        return response.data;
-      });
+  getBooking(data) {
+    return axios.post(API_URL + "/getFlights",data)
   }
 }
 
-export default new UserService();
+export default new BookingService();

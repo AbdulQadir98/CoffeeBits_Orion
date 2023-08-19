@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import '../styles/flight.css'
@@ -5,8 +6,34 @@ import rocket from '../assets/Rocket.jpg'
 import flight from '../assets/flight.PNG'
 import bitcoin from '../assets/bitcoin.PNG'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import BookingService from '../services/test.js'
+
 
 const Flight = () => {
+
+    useEffect(() => {
+        //Set this using the booking info
+        let postData={
+            "startingLocation": 2,
+            "endingLocation": 1,
+            "departureDate":"2023-08-17",
+            "oneway":false,
+            "returnDate":"2023-08-24"
+            
+        }
+        const fetchFlights = async () => {
+            BookingService.getBooking(postData)
+            .then(response => {
+              console.log(response.data);
+              
+            })
+            .catch(error => {
+              console.error(error.response.data);
+              
+            });
+        };
+        fetchFlights();
+      }, []);
 
     const navigate = useNavigate();
 
