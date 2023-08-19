@@ -28,6 +28,11 @@ const constants = {
     REQUIRED_FIELD: "This field is required",
     INVALID_EMAIL: "Invalid email format",
   },
+
+  //Required fields for search flights
+  REQUIRED_FIELDS: {
+    FLIGHT_SCHEDULE_SEARCH: ["startingLocation","endingLocation","departureDate"]    
+  }
 };
 
 module.exports = constants;
