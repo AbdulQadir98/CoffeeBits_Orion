@@ -1,0 +1,36 @@
+version: '2.4'
+
+services:
+
+  frontend:
+    build: frontend
+    image: frontend:latest
+    ports:
+      - "3000:3000"
+
+  dev-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orion
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+
+  backend:
+    build: backend
+    image: backend:latest
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - dev-db
+    environment:
+      DB_HOST: dev-db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+      DB_PORT: 5432
+volumes:
+  database:
