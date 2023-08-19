@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/main.css'
-import icon from '../assets/icon.jpeg';
+import icon from '../assets/icon.PNG';
 
 const Header = () => {
     return ( 
@@ -8,7 +8,7 @@ const Header = () => {
           <div className='icon'>
             <img src={icon} alt="App Icon"/>
           </div>
-          <div class="app-name">
+          <div className="app-name">
             Orion
           </div>
         </div> 
