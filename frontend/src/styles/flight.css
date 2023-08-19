@@ -20,13 +20,16 @@
 
 .price{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 80%;
     padding: 25px 0 15px 0;
 }
 
 .amount{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: #7A6292;
     padding: 8px 16px;
     font-family: 'Orbitron';
@@ -35,8 +38,13 @@
     width: 30%;
 }
 
+.amount img{
+    width: 25px;
+    height: 25px;
+}
+
 .image {
-    padding: 20px 0 15px 0;
+    padding: 10px 0 15px 0;
     width: 220px;
     height: 150px;
     border-radius: 25%;
@@ -47,20 +55,56 @@
     display: flex;
     flex-direction: column;
     width: 80%;
+    margin-bottom: 10px;
   }
   
   .flight-path{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .flight-image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flight-path div img{
+    background-color: #7A6292;
+    width: 40px;
+    height: 30px;
+    object-fit: cover;
+  }
+
+  .flight-path div span{
+    font-size: 32px;
+  }
+
+  .flight-path div p{
+    margin-top: 2px;
+    color: var(--color4);
   }
 
   .flight-seat {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .flight-seat span{
+    margin-top: 2px;
+    color: var(--color4);
   }
 
   .seat-info{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .seat-info div div{
+    margin: 10px 0 3px 0;
   }
