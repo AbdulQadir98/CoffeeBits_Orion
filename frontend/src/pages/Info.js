@@ -38,7 +38,7 @@ const Info = () => {
           </div>
 
           <div className="traveler">
-            <h3>Traveller Information</h3>
+            <p>Traveller Information</p>
             <div className="traveler-info">
               <span>Passenger - 1</span>
               <div className="traveler-name">
@@ -138,7 +138,7 @@ const Info = () => {
 
           <div className="launch">
             {/* <span className="sub">Launch Time</span> */}
-            <h5>Launch Time</h5>
+            <p>Launch Time</p>
             <div className="launchTime">
               <button>10:00 AM</button>
               <button>10:00 AM</button>
