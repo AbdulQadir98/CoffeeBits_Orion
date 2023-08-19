@@ -1,61 +1,62 @@
-module.exports = (sequelize, Sequelize) => {
+const flightScheduleModule = (sequelize, Sequelize) => {
+  const flightSchedule = sequelize.define("flightSchedule", {
+    scheduleId: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
 
-    const flightSchedule = sequelize.define("flightSchedule", {
-        scheduleId: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            allowNull: false,
-            primaryKey: true,
-        },
+    flightName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
 
-        flightName: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
+    type: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
 
-        type: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
 
-        amount: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
 
-        status: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
+    departureTime: {
+      type: Sequelize.TIME,
+    },
 
-        departureTime: {
-            type: Sequelize.TIME,
-        },
+    arrivalTime: {
+      type: Sequelize.TIME,
+    },
 
-        arrivalTime: {
-            type: Sequelize.TIME,
-        },
+    departureDate: {
+      type: Sequelize.DATE,
+    },
 
-        departureDate: {
-            type: Sequelize.DATE,
-        },
+    duration: {
+      type: Sequelize.TIME,
+    },
 
-        duration: {
-            type: Sequelize.TIME,
-        },
+    businessClassSeatCount: {
+      type: Sequelize.INTEGER,
+    },
 
-        businessClassSeatCount: {
-            type: Sequelize.INTEGER
-        },
+    economyClassSeatCount: {
+      type: Sequelize.INTEGER,
+    },
 
-        economyClassSeatCount: {
-            type: Sequelize.INTEGER
-        },
+    firstClassSeatCount: {
+      type: Sequelize.INTEGER,
+    },
+  });
 
-        firstClassSeatCount: {
-            type: Sequelize.INTEGER
-        }
-    });
-
-    return flightSchedule;
+  return flightSchedule;
 };
+
+module.exports = { flightScheduleModule };
