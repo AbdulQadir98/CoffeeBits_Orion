@@ -4,12 +4,29 @@ const helper = require("../helpers/seatCount.helpers.js");
 const db = require("../models");
 
 const flightSchedules = db.schedule;
+const flightBooking = db.booking;
+const flightPassenger = db.passenger;
 
-const createBooking = async () => {
+const createBooking = async (bookingInfo) => {
   try {
-    //   const bookings = {"id":"001"};
-    //   return bookings;
-    throw bookingException.createBookingError("booking not made");
+    console.log(bookingInfo);
+    const booking = await flightBooking.create({flightScheduleScheduleId : bookingInfo.scheduleId,} );
+
+    const passengerData = bookingInfo.passengers;
+
+    const passengers = await flightPassenger.bulkCreate(
+      passengerData.map((passenger) => ({
+        name : passenger.name,
+        age : passenger.age,
+        gender : passenger.gender,
+        class : passenger.class,
+        food : passenger.food,
+        bookingBookingId: booking.bookingId
+      }))
+    );
+
+    return booking;
+
   } catch (error) {
     throw error;
   }
@@ -17,99 +34,43 @@ const createBooking = async () => {
 
 const getFlights = async (passengerInput) => {
   try {
-    passengers = [
-      {
-        name: "John Doe",
-        age: 30,
-        gender: "male",
-        class: "business",
-        food: "non-veg",
-      },
-      {
-        name: "Jane Smith",
-        age: 25,
-        gender: "female",
-        class: "economic",
-        food: "veg",
-      },
-      {
-        name: "Alex Johnson",
-        age: 45,
-        gender: "other",
-        class: "first",
-        food: "non-veg",
-      },
-      {
-        name: "Emily Davis",
-        age: 28,
-        gender: "female",
-        class: "economic",
-        food: "veg",
-      },
-      {
-        name: "Michael Brown",
-        age: 55,
-        gender: "male",
-        class: "business",
-        food: "non-veg",
-      },
-      {
-        name: "Sophia Lee",
-        age: 22,
-        gender: "female",
-        class: "economic",
-        food: "veg",
-      },
-      {
-        name: "Ethan Martinez",
-        age: 32,
-        gender: "male",
-        class: "first",
-        food: "non-veg",
-      },
-      {
-        name: "Olivia Wilson",
-        age: 29,
-        gender: "female",
-        class: "business",
-        food: "veg",
-      },
-      {
-        name: "Noah Taylor",
-        age: 40,
-        gender: "male",
-        class: "economic",
-        food: "non-veg",
-      },
-      {
-        name: "Ava Anderson",
-        age: 27,
-        gender: "female",
-        class: "first",
-        food: "veg",
-      },
-    ];
-
-    const seatCount = helper.getSeatCountForClass(passengers);
-    console.log(seatCount);
-
     let startingLocation = passengerInput.startingLocation;
     let destination = passengerInput.endingLocation;
     let departureDate = passengerInput.departureDate;
+    let tripType = passengerInput.oneway;
+    let returnDate = passengerInput.returnDate;
+    // const seatCount = helper.getSeatCountForClass(passengers);
 
-    let flights = flightSchedules.findAll({
-      where: {
-        destinationPlanetId: destination,
-        startPlanetId: startingLocation,
-        departureDate: departureDate,
-      },
-    });
+    let result = {
+      "oneWay":null,
+      "returnFlights" :null
+    };
+   
+    result.oneWay = getFlightResults(startingLocation,destination,departureDate);
 
-    return flights;
-    // throw bookingException.createBookingError("booking not made")
+    if(tripType)
+    {
+      result.returnFlights = getFlightResults(destination,startingLocation,returnDate);
+    }
+    
+    return result;
+  
   } catch (error) {
     throw error;
   }
 };
+
+const getFlightResults = (startingLocation,destination,departureDate) => {
+  let flights = flightSchedules.findAll({
+    where: {
+      destinationPlanetId: destination,
+      startPlanetId: startingLocation,
+      departureDate : departureDate
+    },
+  });
+
+  return flights;
+};
+
 
 module.exports = { createBooking, getFlights };

@@ -22,7 +22,7 @@ db.sequelize = sequelize;
 db.user = require("./user.models.js").userModule(sequelize, Sequelize);
 db.booking = require("./booking.models.js").bookingModule(sequelize, Sequelize);
 db.planet = require("./planet.models.js").planetModule(sequelize, Sequelize);
-db.schedule = require("./flight.schedule.js").flightScheduleModule(
+db.schedule = require("./flightSchedule.js").flightScheduleModule(
   sequelize,
   Sequelize
 );
@@ -30,11 +30,11 @@ db.passenger = require("./passenger.models.js").passengerModule(
   sequelize,
   Sequelize
 );
-db.classInfo = require("./class.info.models.js").classInfoModule(
+db.classInfo = require("./classInfo.models.js").classInfoModule(
   sequelize,
   Sequelize
 );
-db.planetInfo = require("./planet.info.models.js").planetInfoModule(
+db.planetInfo = require("./planetInfo.models.js").planetInfoModule(
   sequelize,
   Sequelize
 );
@@ -43,6 +43,8 @@ db.user.hasMany(db.booking);
 db.planet.hasMany(db.planetInfo);
 db.schedule.hasMany(db.classInfo);
 db.booking.hasMany(db.passenger);
+db.schedule.hasMany(db.booking);
+db.passenger.belongsTo(db.booking);
 
 db.schedule.belongsTo(db.planet, { as: "destination" });
 db.schedule.belongsTo(db.planet, { as: "start" });
