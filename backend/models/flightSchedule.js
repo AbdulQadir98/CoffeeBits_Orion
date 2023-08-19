@@ -36,7 +36,7 @@ const flightScheduleModule = (sequelize, Sequelize) => {
     },
 
     departureDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATEONLY,
     },
 
     duration: {
