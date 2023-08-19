@@ -6,7 +6,7 @@ import rocket from '../assets/Rocket.jpg'
 import flight from '../assets/flight.PNG'
 import bitcoin from '../assets/bitcoin.PNG'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import BookingService from '../services/test.js'
+import { getBooking } from '../services/booking.service.js'
 
 
 const Flight = () => {
@@ -22,14 +22,14 @@ const Flight = () => {
             
         }
         const fetchFlights = async () => {
-            BookingService.getBooking(postData)
+            getBooking(postData)
             .then(response => {
               console.log(response.data);
               
             })
             .catch(error => {
-              console.error(error.response.data);
-              
+              // console.error(error.response.data);
+              console.log(error.message);
             });
         };
         fetchFlights();
@@ -59,7 +59,7 @@ const Flight = () => {
                 </div>
             </div>
             <div>
-                <img class="image" src={rocket} alt="rocket"/>
+                <img className="image" src={rocket} alt="rocket"/>
             </div>
             <div className="flight-info">
                 <div className="flight-path">

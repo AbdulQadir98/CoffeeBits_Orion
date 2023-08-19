@@ -13,9 +13,9 @@ export const bookingSlice = createSlice({
   reducers: {
     addBooking: (state, action) => {
         state.date = action.payload
-        state.price = action.payload;
-        state.from = action.payload
-        state.to = action.payload
+        // state.price = action.payload;
+        // state.from = action.payload
+        // state.to = action.payload
     },
     clearBooking: (state) => {
         state.date = null;
