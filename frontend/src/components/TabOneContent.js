@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,13 +8,17 @@ const TabOneContent = () => {
 
   const navigate = useNavigate();
 
-  // const handleSelect = (date) => {
-  //   console.log("@@@", date)
-  // };
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(JSON.stringify(date).substring(1, 11));
+    // console.log('Selected Date:', selectedDate);
+  };
+
   return (
     <div className='tab-content'>
       <div className="input-container">
-        <input type="text" value="11 Oct 2022" readonly/>
+        <input type="text" value={selectedDate} readOnly/>
       </div>
       <div className='calendar'>
         <p className="">
@@ -22,7 +26,10 @@ const TabOneContent = () => {
         </p>
         <hr/>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar />
+          <DateCalendar 
+            date={selectedDate}
+            onChange={handleDateChange}
+          />
         </LocalizationProvider>
       </div>
       <div 

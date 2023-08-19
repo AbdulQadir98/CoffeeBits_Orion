@@ -27,13 +27,19 @@
 }
 
 .provider div{ 
+  display: flex;
+  align-items: center;
   width: 40%;
   background-color: #7A6292;
-  padding: 8px 16px;
+  padding: 4px 16px;
   font-family: 'Orbitron';
   border-radius: 5px;
 }
 
+.provider div img{
+  width: 25px;
+  height: 25px;
+}
 .date-container {
     width: 80%;
     position: relative;

@@ -16,7 +16,7 @@ const TabTwoContent = () => {
   return (
     <div className='tab-content'>
       <div className="input-container">
-        <input type="text" value="11 Oct 2022 - 11 Nov 2022" readonly/>
+        <input type="text" value="11 Oct 2022 - 11 Nov 2022" readOnly/>
       </div>
       
       <div className='calendar'>

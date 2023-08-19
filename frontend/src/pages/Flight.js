@@ -4,6 +4,7 @@ import '../styles/flight.css'
 import rocket from '../assets/Rocket.jpg'
 import flight from '../assets/flight.PNG'
 import bitcoin from '../assets/bitcoin.PNG'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const Flight = () => {
 
@@ -14,8 +15,14 @@ const Flight = () => {
         <Header />
         <div className="container">
             <div className="back-button">
-                <div className="text-tags">O</div>
-                <div className="text-tags">flight-details</div>
+                <div className="text-tags">
+                    <ArrowBackIosIcon 
+                        onClick={() => {
+                            navigate("/checkout");
+                        }}
+                    />
+                </div>
+                <div className="text-tags">Flight Information</div>
             </div>
             <div className="price">
                 <div className="text-tags">Total</div>

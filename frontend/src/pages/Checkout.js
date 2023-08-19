@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import '../styles/flight.css'
 import '../styles/cards.css'
+import bitcoin from '../assets/bitcoin.PNG'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const Checkout = () => {
 
@@ -12,7 +14,13 @@ const Checkout = () => {
         <Header />
         <div className="container">
             <div className="back-button">
-                <div className="back-arrow">O</div>
+                <div className="back-arrow">
+                    <ArrowBackIosIcon 
+                        onClick={() => {
+                            navigate("/info");
+                        }}
+                    />
+                </div>
                 <div className="text-tags">Flight : Earth - Venus</div>
             </div>
             <div className="heading">
@@ -34,7 +42,10 @@ const Checkout = () => {
                 </div>
                 <div className="provider">
                     <div>AirTours</div>
-                    <div>40.00</div>
+                    <div>
+                        <img src={bitcoin} alt="coin" />
+                        <div>40.00</div>
+                    </div>
                 </div>
                 <div 
                     className="submit-button" 
@@ -59,7 +70,10 @@ const Checkout = () => {
                 </div>
                 <div className="provider">
                     <div>AirTours</div>
-                    <div>40.00</div>
+                    <div>
+                        <img src={bitcoin} alt="coin" />
+                        <div>40.00</div>
+                    </div>
                 </div>
                 <div 
                     className="submit-button" 
