@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
@@ -14,23 +14,23 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// const db = require("./models");
+const db = require("./models");
 
-// db.sequelize.sync()
-//   .then(() => {
-//     console.log("Connected with database...");
-//   })
-//   .catch((err) => {
-//     console.log("Failed to sync db: " + err.message);
-//   });
+db.sequelize
+  .sync({force: false})
+  .then(() => {
+    console.log("Connected with database...");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Orion" });
-});
+require("./routes/booking.routes.js")(app);
 
-// require("./routes/user.routes")(app);
+//middleware
+require("./middleware/notFound.middleware.js")(app);
 
-const PORT = process.env.DB_PORT || 8080;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
