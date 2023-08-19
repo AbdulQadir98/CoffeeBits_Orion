@@ -18,9 +18,9 @@ const bookingService = require("../services/booking.services.js");
   const getFlights = async (req, res) => {
     try {
     
-      const newBooking = await bookingService.getFlights()
+      const filteredFlights = await bookingService.getFlights(req)
       
-      res.status(201).json(newBooking);
+      res.status(201).json(filteredFlights);
     } catch (error) {
         
       res.status(error.statusCode).json({"error":error.message});
