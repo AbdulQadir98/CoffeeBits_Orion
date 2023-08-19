@@ -1,3 +1,4 @@
+
 const bookingException = require("../exceptions/index.js")
 
 const db = require('../models')
