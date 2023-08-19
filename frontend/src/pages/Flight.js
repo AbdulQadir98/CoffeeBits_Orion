@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import '../styles/flight.css'
 import rocket from '../assets/Rocket.jpg'
 
 const Flight = () => {
+
+    const navigate = useNavigate();
+
     return ( 
       <>
         <Header />
@@ -19,7 +23,14 @@ const Flight = () => {
                 <img class="image" src={rocket} alt="rocket"/>
             </div>
             <div className="submit-button">Confirm</div>
-            <div className="cancel-button">Cancel</div>
+            <div 
+                className="cancel-button"
+                onClick={() => {
+                    navigate("/");
+                  }}
+            >
+                Cancel
+            </div>
         </div>
       </>
      );

@@ -1,9 +1,12 @@
 // import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const TabOneContent = () => {
+
+  const navigate = useNavigate();
 
   // const handleSelect = (date) => {
   //   console.log("@@@", date)
@@ -17,12 +20,18 @@ const TabOneContent = () => {
         <p className="">
           When are you going?
         </p>
-        <hr />
+        <hr/>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar />
         </LocalizationProvider>
       </div>
-      <div className="submit-button">Apply</div>
+      <div 
+        className="submit-button" 
+        onClick={() => {
+          navigate("/info");
+        }}>
+        Apply
+      </div>
       <div className="cancel-button">Cancel</div>
     </div>
   );
