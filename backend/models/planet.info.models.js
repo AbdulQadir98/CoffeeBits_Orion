@@ -1,25 +1,26 @@
-module.exports = (sequelize, Sequelize) => {
+const planetInfoModule = (sequelize, Sequelize) => {
+  const planetInfo = sequelize.define("planetInfo", {
+    planetInfoId: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
 
-    const planetInfo = sequelize.define("planetInfo", {
-        planetInfoId: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            allowNull: false,
-            primaryKey: true,
-        },
+    heading: {
+      type: Sequelize.STRING,
+    },
 
-        heading: {
-            type: Sequelize.STRING
-        },
+    description: {
+      type: Sequelize.TEXT,
+    },
 
-        description: {
-            type: Sequelize.TEXT
-        },
+    icon: {
+      type: Sequelize.STRING,
+    },
+  });
 
-        icon: {
-            type: Sequelize.STRING
-        },
-    });
-
-    return planetInfo;
+  return planetInfo;
 };
+
+module.exports = { planetInfoModule };
