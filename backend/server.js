@@ -14,15 +14,15 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// const db = require("./models");
+const db = require("./models");
 
-// db.sequelize.sync()
-//   .then(() => {
-//     console.log("Connected with database...");
-//   })
-//   .catch((err) => {
-//     console.log("Failed to sync db: " + err.message);
-//   });
+db.sequelize.sync()
+  .then(() => {
+    console.log("Connected with database...");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
 
 require("./routes/auth.routes.js")(app);
 require("./routes/booking.routes.js")(app);
