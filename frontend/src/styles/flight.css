@@ -20,7 +20,9 @@
 
 .price{
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
+    width: 80%;
     padding: 25px 0 15px 0;
 }
 
@@ -30,13 +32,35 @@
     font-family: 'Orbitron';
     border-radius: 5px;
     margin-left: 20px;
+    width: 30%;
 }
 
 .image {
     padding: 20px 0 15px 0;
-    width: 280px;
-    height: 220px;
-    border-radius: 30%;
+    width: 220px;
+    height: 150px;
+    border-radius: 25%;
     object-fit: cover;
   }
 
+  .flight-info{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  
+  .flight-path{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .flight-seat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .seat-info{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
