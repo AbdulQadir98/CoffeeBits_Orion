@@ -4,12 +4,12 @@ const getSeatCountForClass = (passengers) => {
     economy: 0,
     first: 0,
   };
-  for (const passenger in passengers) {
-    if (passenger.class === "business") {
+  for (let passenger in passengers) {
+    if (passengers[passenger].class === "business") {
       seatCount.business++;
-    } else if (passenger.class === "economy") {
+    } else if (passengers[passenger].class === "economic") {
       seatCount.economy++;
-    } else if (passenger.class === "first") {
+    } else if (passengers[passenger].class === "first") {
       seatCount.first++;
     }
   }
