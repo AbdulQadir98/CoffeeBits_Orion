@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import '../styles/flight.css'
@@ -10,6 +10,7 @@ import { addBooking } from '../features/booking/bookingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { serviceProvider } from "../constants/constants";
 import { getFlights } from '../services/booking.service.js'
+import { getLocationCode } from "../utils/location.utils";
 
 const price = 40;
 
@@ -23,20 +24,23 @@ const Checkout = () => {
     const launchTime = useSelector((state) => state.booking.launch);
     const passenger = useSelector((state) => state.booking.passenger);
 
-    // const [flights, setFlights] = useState(''); 
+    const [flights, setFlights] = useState(null); 
 
     useEffect(() => {
-        let postData={
-            "startingLocation": fromLocation,
-            "endingLocation": toLocation,
-            "departureDate":selectedDate,
-            "oneway":true,
-            "passengers":passenger,
-        }
+        const departure = getLocationCode(fromLocation);
+        const destination = getLocationCode(toLocation);
+
+        const postData = {
+            startingLocation: departure,
+            endingLocation: destination,
+            departureDate: selectedDate,
+        };
+    
         const fetchFlights = async () => {
             getFlights(postData)
             .then(response => {
               console.log("Available flights", response.data);
+              setFlights(response.data)
             })
             .catch(error => {
               // console.error(error.response.data);
@@ -44,7 +48,7 @@ const Checkout = () => {
             });
         };
         fetchFlights();
-      }, []);
+      }, [fromLocation, toLocation, selectedDate]);
     
     const handleCheck = (e, price) => {
       e.preventDefault();
@@ -70,7 +74,9 @@ const Checkout = () => {
                 <div className="text-tags">{fromLocation} to {toLocation}</div>
                 <div className="inner-text">flights avaliable for {passenger.length} Passengers</div>
             </div>
-            <div className="card">
+                
+            {flights && flights.map((flight, index) => (               
+              <div className="card">
                 <hr className="line"/>
                 <div className="date-container">
                     <div className="inner-input">
@@ -87,7 +93,7 @@ const Checkout = () => {
                     <div>{serviceProvider}</div>
                     <div>
                         <img src={bitcoin} alt="coin" />
-                        <div>{price}.00</div>
+                        {/* <div>{{flight.price}}.00</div> */}
                     </div>
                 </div>
                 <div 
@@ -97,7 +103,9 @@ const Checkout = () => {
                     }}>
                     Check
                 </div>
-            </div>
+              </div>
+            ))}
+
             <div className="card">
                 <hr className="line"/>
                 <div className="date-container">
