@@ -22,7 +22,6 @@ const Flight = () => {
     const price = useSelector((state) => state.booking.price);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
         const departure = getLocationCode(fromLocation);
         const destination = getLocationCode(toLocation);
 
@@ -115,7 +114,7 @@ const Flight = () => {
             <button 
                 className="submit-button"
                 onClick={() => {
-                    navigate("/");
+                    handleSubmit();
                   }}
             >
                 Confirm
@@ -123,7 +122,7 @@ const Flight = () => {
             <button 
                 className="cancel-button"
                 onClick={() => {
-                    handleSubmit();
+                    navigate("/");
                   }}
             >
                 Cancel
