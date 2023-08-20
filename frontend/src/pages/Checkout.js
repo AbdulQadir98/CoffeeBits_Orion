@@ -4,10 +4,13 @@ import '../styles/flight.css'
 import '../styles/cards.css'
 import bitcoin from '../assets/bitcoin.PNG'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useSelector } from 'react-redux';
 
 const Checkout = () => {
 
     const navigate = useNavigate();
+    const fromLocation = useSelector((state) => state.booking.from);
+    const toLocation = useSelector((state) => state.booking.to); 
 
     return ( 
       <>
@@ -21,10 +24,10 @@ const Checkout = () => {
                         }}
                     />
                 </div>
-                <div className="text-tags">Flight : Earth - Venus</div>
+                <div className="text-tags">Flight : {fromLocation} - {toLocation}</div>
             </div>
             <div className="heading">
-                <div className="text-tags">Earth to Venus</div>
+                <div className="text-tags">{fromLocation} to {toLocation}</div>
                 <div className="inner-text">2 Passengers Return Trip Business Class</div>
             </div>
             <div className="card">
@@ -32,12 +35,12 @@ const Checkout = () => {
                 <div className="date-container">
                     <div className="inner-input">
                         <div className="inner-text">from</div>
-                        <div>Earth</div>
+                        <div>{fromLocation}</div>
                     </div>
                     <div className="inner-input">=</div>
                     <div className="inner-input">
                         <div className="inner-text">to</div>
-                        <div>Venus</div>
+                        <div>{toLocation}</div>
                     </div>
                 </div>
                 <div className="provider">
@@ -60,19 +63,19 @@ const Checkout = () => {
                 <div className="date-container">
                     <div className="inner-input">
                         <div className="inner-text">from</div>
-                        <div>Earth</div>
+                        <div>{fromLocation}</div>
                     </div>
                     <div className="inner-input">=</div>
                     <div className="inner-input">
                         <div className="inner-text">to</div>
-                        <div>Venus</div>
+                        <div>{toLocation}</div>
                     </div>
                 </div>
                 <div className="provider">
                     <div>AirTours</div>
                     <div>
                         <img src={bitcoin} alt="coin" />
-                        <div>40.00</div>
+                        <div>30.00</div>
                     </div>
                 </div>
                 <div 

@@ -7,10 +7,17 @@ import flight from '../assets/flight.PNG'
 import bitcoin from '../assets/bitcoin.PNG'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { getBooking } from '../services/booking.service.js'
-
+import { useSelector } from 'react-redux';
 
 const Flight = () => {
 
+    const navigate = useNavigate();
+    const selectedDate = useSelector((state) => state.booking.selectedDate); 
+    const fromLocation = useSelector((state) => state.booking.from);
+    const toLocation = useSelector((state) => state.booking.to);
+    const launchTime = useSelector((state) => state.booking.launch);
+    const passenger = useSelector((state) => state.booking.passenger);
+ 
     useEffect(() => {
         //Set this using the booking info
         let postData={
@@ -34,9 +41,7 @@ const Flight = () => {
         };
         fetchFlights();
       }, []);
-
-    const navigate = useNavigate();
-
+ 
     return ( 
       <>
         <Header />
@@ -64,24 +69,24 @@ const Flight = () => {
             <div className="flight-info">
                 <div className="flight-path">
                     <div>
-                        <span>Earth</span>
-                        <div>21:30</div>
-                        <p>Fri, 16 August</p>
+                        <span>{fromLocation}</span>
+                        <div>{launchTime}</div>
+                        <p>{selectedDate}</p>
                     </div>
                     <div className="flight-image">
                         <img src={flight} alt="flight" />
                         <p>9h 25min</p>
                     </div>
                     <div>
-                        <span>Venus</span>
-                        <div>03:20</div>
-                        <p>Mon, 10 May</p>
+                        <span>{toLocation}</span>
+                        <div>03:20 PM</div>
+                        <p>{selectedDate}</p>
                     </div>
                 </div>
                 <hr className="line"/>
                 <div className="flight-seat">
                     <div>Passenger</div>
-                    <span>Jenny Simmens</span>
+                    <span>{passenger[0]['fullName']}</span>
                     <div className="seat-info">
                         <div>
                             <div>Seat</div>
@@ -89,7 +94,7 @@ const Flight = () => {
                         </div>
                         <div>
                             <div>Class</div>
-                            <span>Economy</span>
+                            <span>{passenger[0]['class']}</span>
                         </div>
                         <div>
                             <div>Gate</div>

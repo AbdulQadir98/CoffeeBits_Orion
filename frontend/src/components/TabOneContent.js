@@ -1,24 +1,25 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-// import { useSelector, useDispatch } from 'react-redux'
-// import { addBooking  } from '../features/booking/bookingSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { addBooking  } from '../features/booking/bookingSlice'
+
+import { formatDate } from '../helpers/date.helper';
 
 const TabOneContent = () => {
 
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const selectedDate = useSelector((state) => state.booking.selectedDate);
 
-  const [currentDate] = useState(new Date());
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  const [selectedDate, setSelectedDate] = useState(formattedDate);
+  // const [currentDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(formatDate(currentDate));
 
   const handleDateChange = (date) => {
-    setSelectedDate(JSON.stringify(date).substring(1, 11));
-    // console.log('Selected Date:', selectedDate);
+    const changedDate =  formatDate(date['$d']);
+    dispatch(addBooking({ selectedDate: changedDate }));
   };
 
   return (
