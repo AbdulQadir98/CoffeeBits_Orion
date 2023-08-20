@@ -11,9 +11,9 @@ const initialState = {
     class: '',
     food: '',
   },
-  from: "",
-  to: "",
-  launch: "",
+  from: '',
+  to: '',
+  launch: '',
   price: 0,
 }
 
@@ -22,20 +22,15 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {
     addBooking: (state, action) => {
-      const { selectedDate, price, from, to, launch, passenger } = action.payload;
+      const { selectedDate, passenger, from, to, launch, price } = action.payload;
       state.selectedDate = selectedDate;
       state.passenger = passenger;
-      state.price = price;
       state.from = from;
       state.to = to;
       state.launch = launch;
+      state.price = price;
     },
     clearBooking: (state) => {
-      state.date = formatDate(new Date());
-      state.price = 0;
-      state.from = null;
-      state.to = null;
-      state.launch = null;
       state.selectedDate = formatDate(new Date());
       state.passenger = {
         fullName: '',
@@ -44,6 +39,10 @@ export const bookingSlice = createSlice({
         class: '',
         food: '',
       };
+      state.from = '';
+      state.to = '';
+      state.launch = '';
+      state.price = 0;
     },
   },
 })
