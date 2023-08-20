@@ -1,8 +1,8 @@
 const { HTTP_STATUS, ERROR_MESSAGES } = require("../constants/constants");
-const someException = require("../exceptions/index.js");
+const { errorMessage } = require("../exceptions/index.js");
 
 const notFound = (req, res) => {
-  const err = someException.createBookingError(
+  const err = errorMessage(
     `${ERROR_MESSAGES.NOT_FOUND} - ${req.originalUrl}`,
     HTTP_STATUS.NOT_FOUND
   );
