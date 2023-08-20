@@ -18,7 +18,6 @@ const flightPassenger = db.passenger;
 
 const createBooking = async (bookingInfo) => {
   try {
-    console.log(bookingInfo);
     const booking = await flightBooking.create({
       flightScheduleScheduleId: bookingInfo.scheduleId,
     });
@@ -50,10 +49,9 @@ const getFlights = async (passengerInput) => {
     );
 
     if (missingFields.length === 0) {
-
       let result = {
-        "oneWay": null,
-        "returnFlights": null
+        oneWay: null,
+        returnFlights: null,
       };
 
       const startingLocation = passengerInput.startingLocation;
@@ -114,7 +112,6 @@ const getFlightResults = (
   departureDate,
   seatCount
 ) => {
-  console.log(seatCount.business);
   let flights = flightSchedules.findAll({
     where: {
       destinationPlanetId: destination,

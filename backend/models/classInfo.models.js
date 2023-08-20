@@ -23,5 +23,4 @@ const classInfoModule = (sequelize, Sequelize) => {
   return classInfo;
 };
 
-
-module.exports={classInfoModule}
+module.exports = { classInfoModule };

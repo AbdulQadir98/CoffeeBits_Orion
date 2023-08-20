@@ -11,4 +11,4 @@ const bookingModule = (sequelize, Sequelize) => {
   return booking;
 };
 
-module.exports={bookingModule}
+module.exports = { bookingModule };

@@ -8,23 +8,23 @@ const passengerModule = (sequelize, Sequelize) => {
     },
 
     GIN: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
 
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
 
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
 
     age: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
 
     gender: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
 
     food: {

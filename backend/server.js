@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const { logger } = require("./utils/index.js");
+const { SUCCESS_MESSAGES, ERROR_MESSAGES } = require("./constants/constants");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -17,12 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./models");
 
 db.sequelize
-  .sync({force: false})
+  .sync({ force: false })
   .then(() => {
-    console.log("Connected with database...");
+    logger.info(SUCCESS_MESSAGES.DB_SUCCESS_CONNECTION);
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
+    logger.error(ERROR_MESSAGES.DB_SYNC_ERROR + err.message);
   });
 
 require("./routes/booking.routes.js")(app);
@@ -30,7 +32,7 @@ require("./routes/booking.routes.js")(app);
 //middleware
 require("./middleware/notFound.middleware.js")(app);
 
-const PORT = 8080;
+const PORT = process.env.SERVER_PORT;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  logger.info(SUCCESS_MESSAGES.SERVER_START + PORT);
 });

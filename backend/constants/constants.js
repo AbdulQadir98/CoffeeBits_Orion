@@ -1,6 +1,8 @@
 const constants = {
   // Common HTTP status codes
   HTTP_STATUS: {
+    OK: 200,
+    CREATED: 201,
     BAD_REQUEST: 400,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
@@ -15,12 +17,15 @@ const constants = {
     FORBIDDEN: "Forbidden",
     NOT_FOUND: "Not found",
     INTERNAL_SERVER_ERROR: "Internal server error",
+    DB_SYNC_ERROR: "Failed to sync db: ",
   },
 
   // Custom success messages
   SUCCESS_MESSAGES: {
-    RESOURCE_CREATED: "Resource created successfully",
+    BOOKING_CREATED: "Booking created successfully ",
     OPERATION_SUCCESSFUL: "Operation completed successfully",
+    SERVER_START: "Server is running on port ",
+    DB_SUCCESS_CONNECTION: "Connected with database...",
   },
 
   // Validation error messages
@@ -31,8 +36,12 @@ const constants = {
 
   //Required fields for search flights
   REQUIRED_FIELDS: {
-    FLIGHT_SCHEDULE_SEARCH: ["startingLocation","endingLocation","departureDate"]    
-  }
+    FLIGHT_SCHEDULE_SEARCH: [
+      "startingLocation",
+      "endingLocation",
+      "departureDate",
+    ],
+  },
 };
 
 module.exports = constants;
