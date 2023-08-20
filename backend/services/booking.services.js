@@ -69,19 +69,19 @@ const getFlights = async (passengerInput) => {
         checkValidDate(returnDate)
       ) {
         if (dateDifferenceValidCheck(departureDate, returnDate)) {
-          // result.returnFlights = await getFlightResults(
-          //   destination,
-          //   startingLocation,
-          //   returnDate,
-          //   seatCount
-          // );
+          result.returnFlights = await getFlightResults(
+            destination,
+            startingLocation,
+            returnDate,
+            seatCount
+          );
 
-          // result.oneWay = await getFlightResults(
-          //   startingLocation,
-          //   destination,
-          //   departureDate,
-          //   seatCount
-          // );
+          result.oneWay = await getFlightResults(
+            startingLocation,
+            destination,
+            departureDate,
+            seatCount
+          );
           return result;
         } else {
           throw errorMessage(
@@ -90,12 +90,12 @@ const getFlights = async (passengerInput) => {
           );
         }
       } else if (checkValidDate(departureDate)) {
-        // result.oneWay = await getFlightResults(
-        //   startingLocation,
-        //   destination,
-        //   departureDate,
-        //   seatCount
-        // );
+        result.oneWay = await getFlightResults(
+          startingLocation,
+          destination,
+          departureDate,
+          seatCount
+        );
         return result;
       } else {
         throw errorMessage(ERROR_MESSAGES.BAD_REQUEST, HTTP_STATUS.BAD_REQUEST);
