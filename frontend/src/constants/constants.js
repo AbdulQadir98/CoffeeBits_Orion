@@ -1,3 +1,4 @@
+// Passenger options
 const options = {
     class: [
       { value: 'business', label: 'Business Class' },
@@ -10,5 +11,12 @@ const options = {
     ],
   };
   
-  export { options };
+export { options };
+
+// Assuming all the travel Duration is a constant
+export const duration = "9h 25min"
+
+// Limited to only one service provider
+export const serviceProvider = "InterGalactic"
+
   

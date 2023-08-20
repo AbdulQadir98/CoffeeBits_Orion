@@ -5,43 +5,46 @@ import '../styles/flight.css'
 import rocket from '../assets/Rocket.jpg'
 import flight from '../assets/flight.PNG'
 import bitcoin from '../assets/bitcoin.PNG'
+import { duration } from "../constants/constants";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { getBooking } from '../services/booking.service.js'
+import { placeBooking } from '../services/booking.service.js'
 import { useSelector } from 'react-redux';
+import { calculateEndTime } from "../helpers/time-calculator.helper";
 
 const Flight = () => {
 
     const navigate = useNavigate();
     const selectedDate = useSelector((state) => state.booking.selectedDate); 
+    const passenger = useSelector((state) => state.booking.passenger);
     const fromLocation = useSelector((state) => state.booking.from);
     const toLocation = useSelector((state) => state.booking.to);
     const launchTime = useSelector((state) => state.booking.launch);
-    const passenger = useSelector((state) => state.booking.passenger);
+    const price = useSelector((state) => state.booking.price);
  
     useEffect(() => {
-        //Set this using the booking info
         let postData={
-            "startingLocation": 2,
-            "endingLocation": 1,
-            "departureDate":"2023-08-17",
-            "oneway":false,
-            "returnDate":"2023-08-24"
-            
+            "startingLocation": fromLocation,
+            "endingLocation": toLocation,
+            "departureDate":selectedDate,
+            "oneway":true,
+            "passengers":passenger,
+            "launchTime": launchTime,
         }
-        const fetchFlights = async () => {
-            getBooking(postData)
+        const setBooking = async () => {
+            placeBooking(postData)
             .then(response => {
               console.log(response.data);
-              
             })
             .catch(error => {
               // console.error(error.response.data);
               console.log(error.message);
             });
         };
-        fetchFlights();
+        setBooking();
       }, []);
  
+    const endTime = calculateEndTime(launchTime, duration);
+
     return ( 
       <>
         <Header />
@@ -60,7 +63,7 @@ const Flight = () => {
                 <div className="text-tags">Total</div>
                 <div className="amount">
                     <img src={bitcoin} alt="coin" />
-                    <div>40.00</div>
+                    <div>{price}.00</div>
                 </div>
             </div>
             <div>
@@ -75,11 +78,11 @@ const Flight = () => {
                     </div>
                     <div className="flight-image">
                         <img src={flight} alt="flight" />
-                        <p>9h 25min</p>
+                        <p>{duration}</p>
                     </div>
                     <div>
                         <span>{toLocation}</span>
-                        <div>03:20 PM</div>
+                        <div>{endTime}</div>
                         <p>{selectedDate}</p>
                     </div>
                 </div>
