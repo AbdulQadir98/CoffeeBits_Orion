@@ -9,10 +9,6 @@ const TabTwoContent = () => {
 
   const navigate = useNavigate();
 
-  // const handleSelect = (date) => {
-  //   console.log("@@@", date)
-  // };
-
   return (
     <div className='tab-content'>
       <div className="input-container">

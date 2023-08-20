@@ -36,7 +36,6 @@ const Info = () => {
     dispatch(
       addBooking({ selectedDate, passenger: passengers, from, to, launch }),
     );
-    console.log(passengers);
     navigate("/checkout");
   };
 
@@ -213,7 +212,7 @@ const Info = () => {
             <button type="submit" className="submit-button">
               Continue
             </button>
-            <button className="cancel-button">Cancel</button>
+            <button type="reset" className="cancel-button">Cancel</button>
           </div>
         </form>
       </div>

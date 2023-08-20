@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import '../styles/flight.css'
@@ -10,6 +9,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { placeBooking } from '../services/booking.service.js'
 import { useSelector } from 'react-redux';
 import { calculateEndTime } from "../helpers/time-calculator.helper";
+import { getLocationCode } from "../utils/location.utils";
 
 const Flight = () => {
 
@@ -20,16 +20,21 @@ const Flight = () => {
     const toLocation = useSelector((state) => state.booking.to);
     const launchTime = useSelector((state) => state.booking.launch);
     const price = useSelector((state) => state.booking.price);
- 
-    useEffect(() => {
-        let postData={
-            "startingLocation": fromLocation,
-            "endingLocation": toLocation,
-            "departureDate":selectedDate,
-            "oneway":true,
-            "passengers":passenger,
-            "launchTime": launchTime,
-        }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const departure = getLocationCode(fromLocation);
+        const destination = getLocationCode(toLocation);
+
+        const postData = {
+            startingLocation: departure,
+            endingLocation: destination,
+            departureDate: selectedDate,
+            oneway:true,
+            passengers:passenger,
+            launchTime: launchTime,
+        };
+
         const setBooking = async () => {
             placeBooking(postData)
             .then(response => {
@@ -41,7 +46,7 @@ const Flight = () => {
             });
         };
         setBooking();
-      }, []);
+      };
  
     const endTime = calculateEndTime(launchTime, duration);
 
@@ -107,15 +112,22 @@ const Flight = () => {
                 </div>
                 <hr className="line"/>
             </div>
-            <div className="submit-button">Confirm</div>
-            <div 
-                className="cancel-button"
+            <button 
+                className="submit-button"
                 onClick={() => {
                     navigate("/");
                   }}
             >
+                Confirm
+            </button>
+            <button 
+                className="cancel-button"
+                onClick={() => {
+                    handleSubmit();
+                  }}
+            >
                 Cancel
-            </div>
+            </button>
         </div>
       </>
      );

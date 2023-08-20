@@ -12,8 +12,6 @@ import { serviceProvider } from "../constants/constants";
 import { getFlights } from "../services/booking.service.js";
 import { getLocationCode } from "../utils/location.utils";
 
-const price = 40;
-
 const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +57,7 @@ const Checkout = () => {
         to: toLocation,
         launch: launchTime,
         price,
-      })
+      }),
     );
     navigate("/flight");
   };
@@ -89,41 +87,41 @@ const Checkout = () => {
           </div>
         </div>
 
-        {flights && flights.oneWay.map((flight, index) => (               
-              <div className="card">
-                <p>{flight.amount}</p>
+        {flights &&
+          flights.oneWay.map((flight, index) => (
+            <div className="card">
+              <hr className="line" />
+              <div className="date-container">
+                <div className="inner-input">
+                  <div className="inner-text">from</div>
+                  <div>{fromLocation}</div>
+                </div>
+                <div className="inner-input">
+                  <SwapHorizIcon />
+                </div>
+                <div className="inner-input">
+                  <div className="inner-text">to</div>
+                  <div>{toLocation}</div>
+                </div>
               </div>
-            ))}
-        <div className="card">
-          <hr className="line" />
-          <div className="date-container">
-            <div className="inner-input">
-              <div className="inner-text">from</div>
-              <div>{fromLocation}</div>
+              <div className="provider">
+                <div>{serviceProvider}</div>
+                <div>
+                  <img src={bitcoin} alt="coin" />
+                  <div>{flight.amount}.00</div>
+                </div>
+              </div>
+              <div
+                className="check-button"
+                onClick={(e) => {
+                  handleCheck(e, flight.amount);
+                }}
+              >
+                Check
+              </div>
             </div>
-            <div className="inner-input">=</div>
-            <div className="inner-input">
-              <div className="inner-text">to</div>
-              <div>{toLocation}</div>
-            </div>
-          </div>
-          <div className="provider">
-            <div>AirTours</div>
-            <div>
-              <img src={bitcoin} alt="coin" />
-              <div>30.00</div>
-            </div>
-          </div>
-          <div
-            className="submit-button"
-            onClick={() => {
-              navigate("/flight");
-            }}
-          >
-            Check
-          </div>
-        </div>
-
+          )
+        )}
         <div className="show-button">Show more results</div>
       </div>
     </>
