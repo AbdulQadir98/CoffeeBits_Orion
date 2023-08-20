@@ -1,10 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { formatDate } from '../../helpers/date.helper';
 
 const initialState = {
-  date: null,
+  selectedDate: formatDate(new Date()),
+  passenger: 
+  {
+    fullName: '',
+    age: '',
+    gender: '',
+    class: '',
+    food: '',
+  },
+  from: "",
+  to: "",
+  launch: "",
   price: 0,
-  from: null,
-  to: null,
 }
 
 export const bookingSlice = createSlice({
@@ -12,16 +22,28 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {
     addBooking: (state, action) => {
-        state.date = action.payload
-        // state.price = action.payload;
-        // state.from = action.payload
-        // state.to = action.payload
+      const { selectedDate, price, from, to, launch, passenger } = action.payload;
+      state.selectedDate = selectedDate;
+      state.passenger = passenger;
+      state.price = price;
+      state.from = from;
+      state.to = to;
+      state.launch = launch;
     },
     clearBooking: (state) => {
-        state.date = null;
-        state.price = 0;
-        state.from = null;
-        state.to = null;
+      state.date = formatDate(new Date());
+      state.price = 0;
+      state.from = null;
+      state.to = null;
+      state.launch = null;
+      state.selectedDate = formatDate(new Date());
+      state.passenger = {
+        fullName: '',
+        age: '',
+        gender: '',
+        class: '',
+        food: '',
+      };
     },
   },
 })
